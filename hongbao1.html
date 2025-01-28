@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信红包</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            font-family: "Helvetica", "Arial", sans-serif;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 375px;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .red-header {
+            background-color: #d32f2f;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .red-header h1 {
+            color: white;
+            margin: 0;
+            font-size: 20px;
+        }
+        
+        .red-header p {
+            color: #ffcdd2;
+            margin: 8px 0 0;
+            font-size: 14px;
+        }
+        
+        .red-packet-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f44336;
+            padding: 20px;
+            color: white;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            margin: 20px auto;
+            width: 150px;
+        }
+        
+        .red-packet-button:hover {
+            background-color: #e53935;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: gray;
+        }
+        
+        .footer span {
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="red-header">
+            <h1>微信红包</h1>
+            <p>复联的红包</p>
+        </div>
+        <div style="padding: 20px; text-align: center;">
+            <button class="red-packet-button" onclick="openPacket()">开红包</button>
+        </div>
+        <div class="footer">
+            <span>恭喜发财，大吉大利</span>
+        </div>
+    </div>
+
+    <script>
+        function openPacket() {
+            document.querySelector('.container').innerHTML = `
+                <div class="red-header">
+                    <h1>微信红包</h1>
+                    <p>红包详情</p>
+                </div>
+                <div style="padding: 50px; text-align: center;">
+                    <h1 style="color:#d32f2f; font-size: 22px;">手慢了，红包派完了</h1>
+                    <p style="color:gray; font-size: 14px; margin-top: 10px;">已抢：￥${(Math.random() * 5).toFixed(2)}</p>
+                </div>
+                <div class="footer">
+                    <span>复联的红包已经派完</span>
+                </div>
+            `;
+        }
+    </script>
+</body>
+
+</html>
