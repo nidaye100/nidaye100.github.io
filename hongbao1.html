@@ -12,6 +12,7 @@
             background-color: #f5f5f5;
             font-family: "Helvetica", "Arial", sans-serif;
             color: #333;
+            text-align: center;
         }
         
         .container {
@@ -26,38 +27,27 @@
         .red-header {
             background-color: #d32f2f;
             padding: 20px;
-            text-align: center;
-        }
-        
-        .red-header h1 {
             color: white;
-            margin: 0;
-            font-size: 20px;
         }
         
-        .red-header p {
-            color: #ffcdd2;
-            margin: 8px 0 0;
-            font-size: 14px;
-        }
-        
-        .red-packet-button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f44336;
-            padding: 20px;
-            color: white;
+        .red-packet-button, .exit-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
             font-size: 16px;
+            color: white;
             border-radius: 10px;
             border: none;
             cursor: pointer;
-            margin: 20px auto;
             width: 150px;
         }
         
-        .red-packet-button:hover {
-            background-color: #e53935;
+        .red-packet-button {
+            background-color: #f44336;
+        }
+        
+        .exit-button {
+            background-color: #777;
         }
         
         .footer {
@@ -79,8 +69,9 @@
             <h1>微信红包</h1>
             <p>IWAI的红包</p>
         </div>
-        <div style="padding: 20px; text-align: center;">
+        <div style="padding: 20px;">
             <button class="red-packet-button" onclick="openPacket()">开红包</button>
+            <button class="exit-button" onclick="exitGame()">退出</button>
         </div>
         <div class="footer">
             <span>恭喜发财，大吉大利</span>
@@ -88,18 +79,49 @@
     </div>
 
     <script>
+        function getRandomAmount() {
+            return (Math.random() * 5).toFixed(2);
+        }
+
+        function getRandomUser() {
+            const users = ["Zara", "小呆", "白桃蜜柚幽", "M只剩o陌路°", "小灵"];
+            return users[Math.floor(Math.random() * users.length)];
+        }
+
         function openPacket() {
+            let grabbed = Math.random() > 0.5; 
+            let amount = grabbed ? getRandomAmount() : "0.00";
+            let user = getRandomUser();
+            let totalAmount = (Math.random() * 10).toFixed(2);
+            
             document.querySelector('.container').innerHTML = `
                 <div class="red-header">
                     <h1>微信红包</h1>
                     <p>红包详情</p>
                 </div>
-                <div style="padding: 50px; text-align: center;">
-                    <h1 style="color:#d32f2f; font-size: 22px;">手慢了，红包派完了</h1>
-                    <p style="color:gray; font-size: 14px; margin-top: 10px;">已抢：￥${(Math.random() * 5).toFixed(2)}</p>
+                <div style="padding: 20px;">
+                    <h2 style="color:#d32f2f;">${grabbed ? `恭喜你抢到 ￥${amount}` : "手慢了，红包派完了"}</h2>
+                    <p>总金额: ￥${totalAmount}</p>
+                    <p>抢到的用户: ${user}</p>
+                    <button class="exit-button" onclick="exitGame()">退出</button>
                 </div>
                 <div class="footer">
                     <span>IWAI的红包已经派完</span>
+                </div>
+            `;
+        }
+
+        function exitGame() {
+            document.querySelector('.container').innerHTML = `
+                <div class="red-header">
+                    <h1>微信红包</h1>
+                    <p>红包已退出</p>
+                </div>
+                <div style="padding: 50px; text-align: center;">
+                    <h1 style="color:#d32f2f; font-size: 22px;">欢迎下次再来</h1>
+                </div>
+                <div class="footer">
+                    <span>IWAI的红包已结束</span>
                 </div>
             `;
         }
